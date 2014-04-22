@@ -1,0 +1,39 @@
+38
+T/z5; T/z5; T/z5; T/z5
+H/z1; H/z1; H/z1; H/z1
+M/z2; M/z2; M/z2; M/z2
+T/z5; M/z2; H/z1; T/z5; T/z5; T/z5; M/z2; T/z5; H/z1; H/z1; T/z5; M/z2
+A; T/z5; M/z4; H/z3; T/z5; T/z5; T/z5; M/z4; T/z5; H/z3; H/z3; T/z5; M/z4
+A; A; T[!x1&!x2]/z5; M/z2; H/z1; T[!x1&!x2]/z5; T[!x1&!x2]/z5; T[!x1&!x2]/z5; M/z2; T[!x1&!x2]/z5; H/z1; H/z1; T[!x1&!x2]/z5; M/z2
+A; T/z5; T/z5; T/z5; T/z5
+A; H/z3; H/z3; H/z3; H/z3
+A; M/z4; M/z4; M/z4; M/z4
+A; T/z5; T/z5; M/z4; H/z3; T/z5; T/z5
+A; A; H/z1; H/z1; H/z1; H/z1
+A; A; M/z2; M/z2; M/z2; M/z2
+A; A; A/z7; T/z5; T/z5; T/z5; T/z5
+A; A; A/z7; H/z1; H/z1; H/z1; H/z1
+A; A; A/z7; M/z2; M/z2; M/z2; M/z2
+A; A; A/z7; A; T/z5
+A; A; A/z7; A; T/z5; T/z5; T/z5; T/z5
+A; A; A/z7; A; H/z3
+A; A; A/z7; A; H/z3; H/z3; H/z3; H/z3
+A; A; A/z7; A; M/z4
+A; A; A/z7; A; M/z4; M/z4; M/z4; M/z4
+A; A; T[!x1&!x2]/z5; T[!x1&!x2]/z5; T[!x1&!x2]/z5
+A; A; T[!x1&!x2]/z5; T[x1&!x2]/z5,z6; T[x2&!x1]/z5,z7
+A; A; T[!x1&!x2]/z5; T[x1&!x2]/z5,z6
+A; A; T[!x1&!x2]/z5; T[x1&!x2]/z5,z6; T[x2&!x1]/z5,z7; A/z7; H/z1
+A; A; T[!x1&!x2]/z5; T[x1&!x2]/z5,z6; T[x2&!x1]/z5,z7; A/z7; M/z2
+A; A; T[!x1&!x2]/z5; T[x1&!x2]/z5,z6; T[x2&!x1]/z5,z7; A/z7; T/z5
+A; A; T[!x1&!x2]/z5; T[x1&!x2]/z5,z6; T[x2&!x1]/z5,z7; H/z1
+A; A; T[!x1&!x2]/z5; T[x1&!x2]/z5,z6; T[x2&!x1]/z5,z7; M/z2
+A; A; T[!x1&!x2]/z5; T[x1&!x2]/z5,z6; T[x2&!x1]/z5,z7; T[!x1&!x2]/z5
+A; A; T[!x1&!x2]/z5; T[x1&!x2]/z5,z6; T[x2&!x1]/z5,z7; A/z7; A; H/z3
+A; A; T[!x1&!x2]/z5; T[x1&!x2]/z5,z6; T[x2&!x1]/z5,z7; A/z7; A; M/z4
+A; A; T[!x1&!x2]/z5; T[x1&!x2]/z5,z6; T[x2&!x1]/z5,z7; A/z7; A; T/z5
+A; A; T[x1&!x2]/z5,z6
+A; A; T[x2&!x1]/z5,z7
+A; A; T[x1&!x2]/z5,z6; T[x2&!x1]/z5,z7
+A; A; T[!x1&!x2]/z5; T[x1&!x2]/z5,z6; A/z7; A; T/z5
+A; A; T[!x1&!x2]/z5

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project muaco-gecco-2014">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="muaco.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="ru.ifmo.optimization.application.Application"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/automataverificator-1.2-SNAPSHOT.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/commons-lang-2.3.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/ltl2ba4j.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/ognl-2.6.9.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/unimod-stub.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="lib/gabp.jar"/>
+        </jar>
+    </target>
+</project>

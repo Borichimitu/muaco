@@ -1,0 +1,101 @@
+#!/bin/bash
+
+# location of this script
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# parameters
+NSTATES=
+NEVENTS=
+MIN_ACTIONS="0"
+NACTIONS=
+VARS_COUNT=
+
+SCENARIOS_SUM_LENGTH=
+ACTIONS_SEQ_LEN=
+BUILD_SCENARIOS="true"
+EXAMPLES_CNT=
+COVER=
+GA="false"
+
+if [[ -z $TRANSITIONS_PERCENT ]]
+then
+    TRANSITIONS_PERCENT=50
+fi
+
+cwd=$(pwd)
+
+#checking comand line options
+while getopts 'cgn:e:a:v:t:l:s:' opt ; do
+    case "$opt" in
+        n) NSTATES="$OPTARG" ;;
+        e) NEVENTS="$OPTARG" ;;
+        a) NACTIONS="$OPTARG" ;;
+        s) ACTIONS_SEQ_LEN="$OPTARG" ;;
+        v) VARS_COUNT="$OPTARG" ;;
+        t) EXAMPLES_CNT="$OPTARG" ;; 
+        l) SCENARIOS_SUM_LENGTH="$OPTARG" ;;
+        c) COVER="true" ;; 
+        g) GA="true" ;;
+        [?]) echo >&2 "Usage: $0 -n (number of EFSM states) -e (number of events) -a (max number of actions) -v (number of variables) -t (transitions percent) -l (sum length of scenarios)"
+            exit 1 ;;
+    esac
+done
+
+#generate EFSM
+java -jar $SCRIPT_DIR/automaton-generator.jar --size $NSTATES --actionsCount $NACTIONS \
+--eventsCount $NEVENTS --minActions $MIN_ACTIONS --maxActions $ACTIONS_SEQ_LEN --varsCount $VARS_COUNT --transitionsPersent $TRANSITIONS_PERCENT > efsm.gv
+
+echo $COVER
+if [[ "$COVER" == "true" ]]
+then
+    java -jar $SCRIPT_DIR/scenarios-generator.jar -a efsm.gv --sumLength $SCENARIOS_SUM_LENGTH --cover | sed 's/~/!/g' | sed 's/, /,/g' > sc
+else
+    java -jar $SCRIPT_DIR/scenarios-generator.jar -a efsm.gv --sumLength $SCENARIOS_SUM_LENGTH --count $EXAMPLES_CNT | sed 's/~/!/g' | sed 's/, /,/g' > sc
+fi
+
+
+nscenarios=$(cat sc | grep -P '.+' | wc -l)
+nscenarios=$(expr $nscenarios / 2)
+cat sc | $SCRIPT_DIR/preprocess-scenarios $nscenarios > scenarios
+
+if [[ "$GA" == "true" ]]
+then
+    cat sc | $SCRIPT_DIR/scenarios-to-tests > tests
+    $SCRIPT_DIR/write-problem-xml $NSTATES false tests scenarios > problem.xml.tmpl
+fi
+rm -f sc
+
+
+DESIRED_FITNESS="2"
+
+#write task properties
+echo -e "class-name=MODEL_CHECKING
+desired-number-of-states=$NSTATES
+desired-fitness=$DESIRED_FITNESS
+minimum-fitness=0
+tests=problem.properties
+penalize-for-incompliance=false
+terminate-when-all-tests-pass=false" > tests-model-checking.properties
+
+EVENTS=$(cat efsm.gv  | grep -o -P '[A-Z]\s\[.+\]\s' | sed 's/~/!/g' | sed 's/\s//g' | sort | uniq | tr '\n' ' ')
+
+ACTIONS=
+for (( i=0; i<$NACTIONS; i++ ))
+do
+    ACTIONS=$ACTIONS"z"$i
+    if [[ i -lt $(expr $NACTIONS - 1) ]] ; then
+        ACTIONS="$ACTIONS,"
+    fi
+done
+
+#write problem.properties
+echo -e "events=$EVENTS
+actions=$ACTIONS
+min-number-of-actions=$MIN_ACTIONS
+max-number-of-actions=$ACTIONS_SEQ_LEN
+use-tests=$USE_TESTS
+tests=tests
+use-formulas=false
+use-scenarios=$BUILD_SCENARIOS
+scenarios=scenarios
+use-negative-scenarios=false" > problem.properties

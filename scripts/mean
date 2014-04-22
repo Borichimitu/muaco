@@ -1,0 +1,9 @@
+#!/usr/bin/python
+import sys
+
+s = 0.0
+count = 0
+for line in sys.stdin:
+    s += float(line)
+    count += 1
+print s / float(count)

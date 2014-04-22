@@ -1,0 +1,18 @@
+#!/usr/bin/python
+import sys
+import math
+
+def mean(data):
+    return sum(data) / float(len(data))
+
+def main():
+    data = [float(line) for line in sys.stdin]
+    ex = mean(data)
+
+    sigma = 0.0
+    for v in data:
+        sigma += pow(v - ex, 2)
+    print math.sqrt(sigma / (len(data) - 1))
+
+if __name__ == '__main__':
+    main()

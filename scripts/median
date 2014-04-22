@@ -1,0 +1,9 @@
+#!/usr/bin/python
+import sys
+import numpy
+
+data = []
+for line in sys.stdin:
+    data += [float(line)]
+
+print numpy.median(data)

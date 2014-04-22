@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="WINDOWS-1251"?>
+<project name="Gabp" default="All">
+
+    <property name="src" location="${basedir}"/>
+    <property name="resources" location="${basedir}/resources"/>
+    <property name="build" location="${basedir}/target/classes"/>
+    <property name="dist"  location="${basedir}/target"/>
+    <property name="lib" location="${dist}/lib" />
+    <property name="jar.file" value="${dist}/gabp.jar"/>
+
+    <target name="init">
+        <tstamp/>
+        <mkdir dir="${dist}"/>
+        <mkdir dir="${build}"/>
+    </target>
+
+    <target name="compile"
+            depends="init"
+            description="compile the source" >
+        <copy todir="${lib}">
+            <fileset dir="${basedir}/lib"/>
+        </copy>
+
+        <javac srcdir="${src}"
+               excludes="state-merging/"
+               destdir="${build}"
+               classpathref="build-classpath"/>
+    </target>
+
+    <path id="build-classpath">
+       <fileset dir="${lib}">
+          <include name="*.jar"/>
+       </fileset>
+    </path>
+
+    <target name="dist"
+            depends="compile"
+            description="generate the distribution"
+    >
+        <manifestclasspath property="lib.list" jarfile="${jar.file}">
+           <classpath refid="build-classpath" />
+        </manifestclasspath>
+
+        <delete file="${jar.file}"/>
+
+        <copy todir="${dist}/c-lib">
+            <fileset dir="${basedir}/c-lib"/>
+        </copy>
+
+        <jar destfile="${jar.file}">
+            <manifest>
+                <attribute name="Main-Class" value="ru.ifmo.ctddev.genetic.transducer.Experiment"/>
+                <attribute name="Class-Path" value=". ${lib.list}"/>
+            </manifest>
+            <fileset dir="${build}" />
+            <fileset dir="${resources}" />
+        </jar>
+    </target>
+	
+	<target name="All"
+		    depends="init, compile, dist"
+		    description="build war"
+	/>
+	
+</project>

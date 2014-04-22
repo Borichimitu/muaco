@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# location of this script
+SCRIPT_DIR=$(dirname $0)
+#SCRIPT_DIR="$(cd "$(dirname $SCRIPT_NAME)" && pwd)"
+
+# parameters
+NSTATES=
+EVENTS_COUNT=
+MIN_ACTIONS=
+NACTIONS=
+VARS_COUNT=
+TRANSITIONS_PERCENT=50
+
+ACTIONS_SEQUENCE_LENGTH=
+
+#checking comand line options
+while getopts ':n:e:m:a:v:s:' opt ; do
+    case "$opt" in
+        n) NSTATES="$OPTARG" ;;
+        e) EVENTS_COUNT="$OPTARG" ;;
+        m) MIN_ACTIONS="$OPTARG" ;;
+        a) NACTIONS="$OPTARG" ;;
+        s) ACTIONS_SEQUENCE_LENGTH="$OPTARG" ;;
+        v) VARS_COUNT="$OPTARG" ;;
+        [?]) echo >&2 "Usage: $0 -n (number of EFSM states) -e (number of events) -m (min number of actions) -a (max number of actions) -s (max actions sequence length) -v (number of variables)" && exit 1 ;;
+    esac
+done
+
+if [[ -z $NSTATES || -z $EVENTS_COUNT || -z $NACTIONS || -z $ACTIONS_SEQUENCE_LENGTH || -z $VARS_COUNT ]] 
+then
+    echo >&2 "Usage: $0 -n (number of EFSM states) -e (number of events) -m (min number of actions) -a (max number of actions) -s (max actions sequence length) -v (number of variables)" && exit 1
+fi
+
+
+#generate EFSM
+java -jar $SCRIPT_DIR/automaton-generator.jar --size $NSTATES --actionsCount $NACTIONS \
+--eventsCount $EVENTS_COUNT --minActions $MIN_ACTIONS --maxActions $ACTIONS_SEQUENCE_LENGTH --varsCount $VARS_COUNT --transitionsPersent $TRANSITIONS_PERCENT 

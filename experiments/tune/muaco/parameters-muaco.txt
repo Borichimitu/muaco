@@ -1,0 +1,5 @@
+evaporation_rate	"--muaco.evaporation-rate "	r	(0.1, 0.9)
+stagnation_parameter	"--muaco.stagnation-parameter "	i	(2, 50)
+big_stagnation_parameter	"--muaco.big-stagnation-parameter "	i	(2, 50)
+number_of_ants	"--muaco.number-of-ants "	i	(1, 20)
+mut_per_step	"--path_selector.numberOfMutationsPerStep "	i	(1, 50)

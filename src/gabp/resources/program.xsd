@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="program">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="parameters" name="parameters" />
+        <xs:element type="xs:string" name="inputSet" />
+        <xs:element type="xs:string" name="outputSet" />
+        <xs:element type="group" name="group" maxOccurs="unbounded" minOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="parameters">
+    <xs:annotation>
+      <xs:documentation>
+        GA parameters
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="fixedOutput" type="xs:boolean" />
+      <xs:element name="populationSize" type="xs:positiveInteger" />
+      <xs:element name="desiredFitness" type="xs:double" />
+      <xs:element name="stateNumber" type="xs:positiveInteger" />
+      <xs:element name="partStay" type="xs:double" />
+      <xs:element name="timeSmallMutation" type="xs:positiveInteger" />
+      <xs:element name="timeBigMutation" type="xs:positiveInteger" />
+      <xs:element name="mutationProbability" type="xs:double" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="group">
+    <xs:sequence>
+      <xs:element name="formulas" type="formulas" minOccurs="0"/>
+      <xs:element name="tests" type="tests" minOccurs="0"/>
+      <xs:element name="negativeTests" type="negativeTests" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="formulas">
+    <xs:annotation>
+      <xs:documentation>
+        LTL formulas.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ltl" type="xs:string" maxOccurs="unbounded"  minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tests">
+    <xs:annotation>
+      <xs:documentation>
+        Tests group.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="test" type="test" maxOccurs="unbounded"  minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="test">
+    <xs:annotation>
+      <xs:documentation>
+        Single test.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="input" type="xs:string"/>
+      <xs:element name="output" type="xs:string"/>
+      <xs:element name="ptest" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="negativeTests">
+    <xs:annotation>
+      <xs:documentation>
+        Disabled Tests group.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ntest" type="xs:string" maxOccurs="unbounded"  minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,20 @@
+#!/usr/bin/python
+
+import sys
+
+def main():
+    out = ""
+    cnt = 0
+    for line in sys.stdin:
+        if len(line) < 2:
+            continue
+        cnt += 1
+        if line[-2] == '>':
+            out += line[:-1]
+        else:
+            out += line
+    print cnt / 2
+    print out[:-1]
+
+if __name__ == '__main__':
+    main()

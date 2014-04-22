@@ -1,0 +1,60 @@
+<program xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation = "resources/program.xsd">
+
+    <parameters>
+        <fixedOutput>true</fixedOutput>
+        <populationSize>137</populationSize>
+        <desiredFitness>0.0075</desiredFitness>
+        <stateNumber>6</stateNumber>
+        <partStay>0.47</partStay>
+        <timeSmallMutation>286</timeSmallMutation>
+        <timeBigMutation>255</timeBigMutation>
+        <mutationProbability>0.08</mutationProbability>
+    </parameters>
+
+    <inputSet>A, T, H, M, T [!x1 &amp; !x2], T [x1 &amp; !x2], T [x2 &amp; !x1]</inputSet>
+    <outputSet>z1, z2, z3, z4, z5, z6, z7</outputSet>
+
+    <group>
+        <tests>
+        <test><ptest>T/z5; T/z5; T/z5; T/z5</ptest></test>
+	<test><ptest>H/z1; H/z1; H/z1; H/z1</ptest></test>
+	<test><ptest>M/z2; M/z2; M/z2; M/z2</ptest></test>
+	<test><ptest>T/z5; M/z2; H/z1; T/z5; T/z5; T/z5; M/z2; T/z5; H/z1; H/z1; T/z5; M/z2</ptest></test>
+	<test><ptest>A; T/z5; M/z4; H/z3; T/z5; T/z5; T/z5; M/z4; T/z5; H/z3; H/z3; T/z5; M/z4</ptest></test>
+	<test><ptest>A; A; T [!x1 &amp; !x2]/z5; M/z2; H/z1; T [!x1 &amp; !x2]/z5; T [!x1 &amp; !x2]/z5; T [!x1 &amp; !x2]/z5; M/z2; T [!x1 &amp; !x2]/z5; H/z1; H/z1; T [!x1 &amp; !x2]/z5; M/z2</ptest></test>
+	<test><ptest>A; T/z5; T/z5; T/z5; T/z5</ptest></test>
+	<test><ptest>A; H/z3; H/z3; H/z3; H/z3</ptest></test>
+	<test><ptest>A; M/z4; M/z4; M/z4; M/z4</ptest></test>
+	<test><ptest>A; T/z5; T/z5; M/z4; H/z3; T/z5; T/z5</ptest></test>
+	<test><ptest>A; A; H/z1; H/z1; H/z1; H/z1</ptest></test>
+	<test><ptest>A; A; M/z2; M/z2; M/z2; M/z2</ptest></test>
+	<test><ptest>A; A; A/z7; T/z5; T/z5; T/z5; T/z5</ptest></test>
+	<test><ptest>A; A; A/z7; H/z1; H/z1; H/z1; H/z1</ptest></test>
+	<test><ptest>A; A; A/z7; M/z2; M/z2; M/z2; M/z2</ptest></test>
+	<test><ptest>A; A; A/z7; A; T/z5</ptest></test>
+	<test><ptest>A; A; A/z7; A; T/z5; T/z5; T/z5; T/z5</ptest></test>
+	<test><ptest>A; A; A/z7; A; H/z3</ptest></test>
+	<test><ptest>A; A; A/z7; A; H/z3; H/z3; H/z3; H/z3</ptest></test>
+	<test><ptest>A; A; A/z7; A; M/z4</ptest></test>
+	<test><ptest>A; A; A/z7; A; M/z4; M/z4; M/z4; M/z4</ptest></test>
+	<test><ptest>A; A; T [!x1 &amp; !x2]/z5; T [!x1 &amp; !x2]/z5; T [!x1 &amp; !x2]/z5</ptest></test>
+	<test><ptest>A; A; T [!x1 &amp; !x2]/z5; T [x1 &amp; !x2]/z5,z6; T [x2 &amp; !x1]/z5,z7</ptest></test>
+	<test><ptest>A; A; T [!x1 &amp; !x2]/z5; T [x1 &amp; !x2]/z5,z6</ptest></test>
+	<test><ptest>A; A; T [!x1 &amp; !x2]/z5; T [x1 &amp; !x2]/z5,z6; T [x2 &amp; !x1]/z5,z7; A/z7; H/z1</ptest></test>
+	<test><ptest>A; A; T [!x1 &amp; !x2]/z5; T [x1 &amp; !x2]/z5,z6; T [x2 &amp; !x1]/z5,z7; A/z7; M/z2</ptest></test>
+	<test><ptest>A; A; T [!x1 &amp; !x2]/z5; T [x1 &amp; !x2]/z5,z6; T [x2 &amp; !x1]/z5,z7; A/z7; T/z5</ptest></test>
+	<test><ptest>A; A; T [!x1 &amp; !x2]/z5; T [x1 &amp; !x2]/z5,z6; T [x2 &amp; !x1]/z5,z7; H/z1</ptest></test>
+	<test><ptest>A; A; T [!x1 &amp; !x2]/z5; T [x1 &amp; !x2]/z5,z6; T [x2 &amp; !x1]/z5,z7; M/z2</ptest></test>
+	<test><ptest>A; A; T [!x1 &amp; !x2]/z5; T [x1 &amp; !x2]/z5,z6; T [x2 &amp; !x1]/z5,z7; T [!x1 &amp; !x2]/z5</ptest></test>
+	<test><ptest>A; A; T [!x1 &amp; !x2]/z5; T [x1 &amp; !x2]/z5,z6; T [x2 &amp; !x1]/z5,z7; A/z7; A; H/z3</ptest></test>
+	<test><ptest>A; A; T [!x1 &amp; !x2]/z5; T [x1 &amp; !x2]/z5,z6; T [x2 &amp; !x1]/z5,z7; A/z7; A; M/z4</ptest></test>
+	<test><ptest>A; A; T [!x1 &amp; !x2]/z5; T [x1 &amp; !x2]/z5,z6; T [x2 &amp; !x1]/z5,z7; A/z7; A; T/z5</ptest></test>
+	<test><ptest>A; A; T [x1 &amp; !x2]/z5,z6</ptest></test>
+	<test><ptest>A; A; T [x2 &amp; !x1]/z5,z7</ptest></test>
+	<test><ptest>A; A; T [x1 &amp; !x2]/z5,z6; T [x2 &amp; !x1]/z5,z7</ptest></test>
+	<test><ptest>A; A; T [!x1 &amp; !x2]/z5; T [x1 &amp; !x2]/z5,z6; A/z7; A; T/z5</ptest></test>
+	<test><ptest>A; A; T [!x1 &amp; !x2]/z5</ptest></test>
+        </tests>
+   </group>
+</program>

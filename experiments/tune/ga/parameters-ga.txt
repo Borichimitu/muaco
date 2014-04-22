@@ -1,0 +1,5 @@
+pop_size	"--pop-size "	i	(100, 2000)
+part_stay	"--part-stay "	r	(0.01, 0.5)
+time_small_mutation	"--time-small-mutation "	i	(50, 500)
+time_big_mutation	"--time-big-mutation "	i	(100, 1000)
+mut_prob	"--mut-prob "	r	(0.01, 0.1)

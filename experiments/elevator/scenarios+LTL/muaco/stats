@@ -1,0 +1,11 @@
+#!/bin/bash
+PATH=$PATH:../../../../scripts/
+
+suc_rate=$(ls attempts/*/*metadata | grep -o -P "[0-9]+\.[0-9]+" | suc-rate 2)
+fitness=$(ls attempts/*/*metadata | grep -o -P "[0-9]+\.[0-9]+" | mean)
+
+mean_evals=$(cat attempts/*/*metadata | grep "step-count"  | awk '{print $3}' | mean)
+median_evals=$(cat attempts/*/*metadata | grep "step-count" | awk '{print $3}' | median)
+se=$(cat attempts/*/*metadata | grep "step-count" | awk '{print $3}' | sigma)
+
+echo "suc_rate=$suc_rate, fitness=$fitness, mean_evals=$mean_evals, median_evals=$median_evals, s.e.=$se"

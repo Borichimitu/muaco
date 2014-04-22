@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cp -r muaco.jar ../gabp/c-lib lib ../../experiments/elevator/scenarios/muaco/
+cp -r muaco.jar ../gabp/c-lib lib ../../experiments/elevator/scenarios+LTL/muaco/
+cp -r muaco.jar ../gabp/c-lib lib ../../experiments/clock/scenarios/muaco/
+cp -r muaco.jar ../gabp/c-lib lib ../../experiments/clock/scenarios+LTL/muaco/
+cp -r muaco.jar ../gabp/c-lib lib ../../experiments/tune/muaco/default/

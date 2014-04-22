@@ -1,0 +1,17 @@
+#!/usr/bin/python
+import sys
+
+def main():
+    n = 0
+    print """digraph g{             
+initial-state = %s""" % sys.argv[1]
+    
+    for line in sys.stdin:
+        if len(line) == 1:
+            n += 1
+            continue
+        print "%d%s" % (n, line[:-1])
+    print "}"
+
+if __name__ == '__main__':
+    main()

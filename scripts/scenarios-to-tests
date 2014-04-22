@@ -1,0 +1,4 @@
+#!/bin/bash
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+sed -r 's/_+/_/g' | sed 's/~/!/g' | sed 's/]$/]->/g' | sed -r 's/^_+//g' | sed 's/;/_/g' | sed 's/,/_/g' | sed 's/ //g' | sed -r 's/_+/_/g' | sed 's/]$/]->/g' | sed -r 's/_+$//g'| $SCRIPT_DIR/cut-newline

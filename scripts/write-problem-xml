@@ -1,0 +1,131 @@
+#!/usr/bin/python
+import sys
+import os
+
+def main():
+    nstates = sys.argv[1]
+    use_tests = sys.argv[2]
+    testsFile = sys.argv[3]
+    scenariosFile = sys.argv[4]
+
+    use_scenarios = "false"
+    if use_tests == "false":
+        use_scenarios = "true"
+
+    print """<program xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation = "resources/program.xsd">
+
+    <parameters>
+        <fixedOutput>%s</fixedOutput>
+        <populationSize>M4_POPULATION_SIZE</populationSize>
+        <desiredFitness>0</desiredFitness>
+        <stateNumber>%s</stateNumber>
+        <partStay>M4_PART_STAY</partStay>
+        <timeSmallMutation>M4_TIME_SMALL_MUTATION</timeSmallMutation>
+        <timeBigMutation>M4_TIME_BIG_MUTATION</timeBigMutation>
+        <mutationProbability>M4_MUTATION_PROBABILITY</mutationProbability>
+    </parameters>
+""" % (use_scenarios, nstates)
+    
+    inputs = []
+    outputs = []
+    ptests = []
+
+    if use_tests == "true":
+        i = 0
+        for line in open(testsFile):
+            if i == 0:
+                i += 1
+                continue
+            io = line[:-1].split("->")
+            inputs += [io[0].replace("_", ", ").replace("[", " [").replace("&", "&amp;")]
+            outputs += [io[1].replace("_", ", ")]
+            i += 1               
+            if len(line) == 0:
+                continue
+        if not len(inputs) == len(outputs):
+            print "Error!"
+
+    inputSet = set()
+    outputSet = set()
+
+
+    i = 0
+    for line in open(scenariosFile):
+        if i == 0:
+            i += 1
+            continue
+        if len(line) == 0:
+            continue
+        ptests += [line[:-1].replace("[", " [").replace("&", "&amp;").replace("  ", " ")]
+        for term in line[:-1].split(" "):
+            if len(term) == 0:
+                continue
+            io = term.split("/")
+            inputSet.add(io[0].replace(";", "").replace("[", " [").strip().replace("&", "&amp;"))
+            if len(io) > 1:
+                for a in io[1].replace(";", "").strip().split(","):
+                    outputSet.add(a)
+        i += 1
+
+    if use_tests == "true":
+        for inputString in inputs:
+            inputSequence = inputString.split(",")
+            for e in inputSequence:
+                event = e.strip().replace("&", " &amp; ")
+                if not event in inputSet:
+                    inputSet.add(event)
+ 
+        for outputString in outputs:
+            outputSequence = outputString.split(",")
+            for a in outputSequence:
+                action = a.strip()
+                if len(action) == 0:
+                    continue
+                if not action in outputSet:
+                    outputSet.add(action)
+
+    i = 0
+    s = ""
+    for e in inputSet:
+        s += e 
+        if i < len(inputSet) - 1:
+            s += ", "
+        i += 1
+    print """    <inputSet>%s</inputSet>""" % s
+
+    i =  0
+    s = ""
+    for a in outputSet:
+        s += a
+        if i < len(outputSet) - 1:
+            s += ", "
+        i += 1
+    print """    <outputSet>%s</outputSet>""" % s
+  
+    print >> sys.stdout, """    
+    <group>
+        <tests>"""
+    for i in range(max(len(inputs), len(ptests))):
+        print >> sys.stdout, """
+            <test>"""
+        if use_tests == "true":
+            print >> sys.stdout, """
+                <input>%s</input>
+                <output>%s</output>""" % (inputs[i], outputs[i])
+        if use_scenarios == "true":
+            print >>  sys.stdout, """
+                <ptest>%s</ptest>""" % ptests[i]
+        print >> sys.stdout, """
+            </test>"""
+  
+    print >> sys.stdout, """
+        </tests>"""
+   
+    print >> sys.stdout,"""
+    </group>
+</program>"""
+    
+
+if __name__ == '__main__':
+    main()

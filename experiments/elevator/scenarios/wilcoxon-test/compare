@@ -1,0 +1,11 @@
+#!/bin/bash
+
+rm *.test test.result
+
+ga=../ga
+muaco=../muaco
+
+cat $ga/attempts/*/*metadata | grep -P "^steps = " | awk '{print $3}' > ga-steps
+cat $muaco/attempts/*/*metadata | grep -P "^step-count = " | awk '{print $3}' > muaco-steps
+
+Rscript wilcox.R ga-steps muaco-steps > test.result

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cp -r target/gabp.jar target/c-lib target/lib ../../experiments/elevator/scenarios/ga/
+cp -r target/gabp.jar target/c-lib target/lib ../../experiments/elevator/scenarios+LTL/ga/
+cp -r target/gabp.jar target/c-lib target/lib ../../experiments/clock/scenarios/ga/
+cp -r target/gabp.jar target/c-lib target/lib ../../experiments/clock/scenarios+LTL/ga/
+cp -r target/gabp.jar target/c-lib target/lib ../../experiments/tune/ga/default/
+cp -r target/gabp.jar ../muaco/lib/

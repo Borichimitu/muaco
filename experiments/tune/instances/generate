@@ -1,0 +1,26 @@
+#!/bin/bash
+
+gen_problem_instance=$(pwd)/../../../scripts/generate-problem-instance
+
+rootdir=$(pwd)
+
+floor=4
+top=6
+
+mkdir -p instances
+
+for ((i=0; i<100; i+=1))
+do
+    n=0
+    while [ "$n" -le $floor ]
+    do
+        n=$RANDOM
+        let "n %= $top"
+    done
+    size=$(expr $n \* 100)
+    nexamples=$(expr $n \* 5)
+    workdir=$rootdir/instances/$i
+    mkdir -p $workdir
+    cd $workdir
+    $gen_problem_instance -n $n -e 3 -a 2 -s 3 -v 2 -t $nexamples -l $size -g
+done
